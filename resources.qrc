@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/plugins/ShapeOrientation" >
+        <file>icon.png</file>
+		<file>help.svg</file>
+    </qresource>
+</RCC>
