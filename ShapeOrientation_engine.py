@@ -106,7 +106,7 @@ def DiagGenerator (angles,inter,theta,interval, colorRamp):
 	
 	plt.show() 
 
-def DiagOrientPolyg (poly, interval, table, diagr, colorRamp):
+def DiagOrientPolyg (poly, interval, table, diagr, colorRamp, Id):
 	
 	polygones= QgsVectorLayer(poly,"polygones","ogr")
 	poly_prov= polygones.dataProvider()
@@ -140,7 +140,7 @@ def DiagOrientPolyg (poly, interval, table, diagr, colorRamp):
 		progress.setValue(ni/ntot*100)
 		geomPolyg= f.geometry() 
 		Aire=geomPolyg.area()
-		Id=str(f.attributes()[0])
+		Idf=str(f.attribute(Id))
 
 	# ConvexHull and centroid of the polygon
 		
@@ -148,7 +148,7 @@ def DiagOrientPolyg (poly, interval, table, diagr, colorRamp):
 		centroidPolyg=geomPolyg.centroid().asPoint()
 
 		gist= MinRect(hullPolyg,centroidPolyg)
-		csvline='%s,%f\n' %(Id,gist*180/pi)
+		csvline='%s,%f\n' %(Idf,gist*180/pi)
 		Exrap.write (csvline)
 		angles.append(gist)
 
@@ -156,7 +156,7 @@ def DiagOrientPolyg (poly, interval, table, diagr, colorRamp):
 	if diagr == True:
 		DiagGenerator(angles,inter,theta,interval, colorRamp)
 
-def DiagOrientLine (line, interval, table, diagr, colorRamp):
+def DiagOrientLine (line, interval, table, diagr, colorRamp,Id):
 	
 	lines= QgsVectorLayer(line,"lines","ogr")
 	lines_prov= lines.dataProvider()
@@ -179,7 +179,7 @@ def DiagOrientLine (line, interval, table, diagr, colorRamp):
 	for f in fLine:
 
 		geomLine= f.geometry() 
-		Id=str(f.attributes()[0])
+		Idf=str(f.attribute(Id))
 		geomL=geomLine.geometry()
 		a=QgsPoint(geomL.startPoint().x(),geomL.startPoint().y())
 		b=QgsPoint(geomL.endPoint().x(),geomL.endPoint().y())
@@ -187,7 +187,7 @@ def DiagOrientLine (line, interval, table, diagr, colorRamp):
 	# Azimuth of the line
 
 		gist= Gisement(a,b)
-		csvline='%s,%f\n' %(Id,gist*180/pi)
+		csvline='%s,%f\n' %(Idf,gist*180/pi)
 		Exrap.write (csvline)
 		angles.append(gist)
 
