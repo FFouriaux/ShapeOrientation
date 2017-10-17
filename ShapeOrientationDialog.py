@@ -145,6 +145,7 @@ class ShorientDialg(QDialog):
 			interval=self.doubleSpinBox.value()
 			diagr=self.checkDiagram.isChecked()
 			colorRamp=self.cbox_ColorRamp.currentText()
+			Id=self.cbox_PolyIdField.currentText()
 			if poly != '':
 				pass
 			else :
@@ -172,7 +173,7 @@ class ShorientDialg(QDialog):
 						if os.name=='nt':
 							shpPath=shpPath[1:]
 			table=export+'/Orientation_'+poly+'.csv'
-			DiagOrientPolyg (shpPath, interval, table, diagr,colorRamp)
+			DiagOrientPolyg (shpPath, interval, table, diagr,colorRamp,Id)
 			AjoutCsvLayer(table)
 			iface.messageBar().clearWidgets()
 			iface.messageBar().pushMessage("ShapeOrientation", "Orientation Completed", level=QgsMessageBar.SUCCESS)
@@ -185,6 +186,7 @@ class ShorientDialg(QDialog):
 			interval=self.doubleSpinBox_2.value()
 			diagr=self.checkDiagram.isChecked()
 			colorRamp=self.cbox_ColorRamp.currentText()
+			Id=self.cbox_LineIdField.currentText()
 			if line != '':
 				pass
 			else :
@@ -212,7 +214,7 @@ class ShorientDialg(QDialog):
 						if os.name=='nt':
 							shpPath=shpPath[1:]
 			table=export+'/Orientation_'+line+'.csv'
-			DiagOrientLine (shpPath, interval, table, diagr,colorRamp)
+			DiagOrientLine (shpPath, interval, table, diagr,colorRamp,Id)
 			AjoutCsvLayer(table)
 			iface.messageBar().clearWidgets()
 			iface.messageBar().pushMessage("ShapeOrientation", "Orientation Completed", level=QgsMessageBar.SUCCESS)
